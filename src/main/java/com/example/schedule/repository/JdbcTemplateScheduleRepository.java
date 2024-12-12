@@ -7,19 +7,20 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class JdbcTemplateSchduleResitory implements ScheduleRepository {
+public class JdbcTemplateScheduleRepository implements ScheduleRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcTemplateSchduleResitory(DataSource dataSource) {
+    public JdbcTemplateScheduleRepository(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public List<ScheduleResponseDto> findAll(String name, String modifiedDate) {
-        List<Object> params = new ArreyList<>();
+        List<Object> params = new ArrayList<>();
 
         StringBuilder query = new StringBuilder("SELECT * FROM schedule WHERE 1=1");
 
@@ -29,7 +30,7 @@ public class JdbcTemplateSchduleResitory implements ScheduleRepository {
         }
 
         if (modifiedDate != null) {
-            query.append(" AND DATE_FORMAT(modified_at", '%Y-%m-%d') = ? ");
+            query.append(" AND DATE_FORMAT(modified_at,'%Y-%m-%d') = ? ");
             params.add(modifiedDate);
         }
 
