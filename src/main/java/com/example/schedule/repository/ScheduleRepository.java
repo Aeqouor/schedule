@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ScheduleRepository {
 
-    static Schedule findScheduleByIdOrElseThrow(Long id);
+    Schedule findScheduleByIdOrElseThrow(Long id);
 
 
     List<ScheduleResponseDto> findAll(String name, String modifiedDate);
