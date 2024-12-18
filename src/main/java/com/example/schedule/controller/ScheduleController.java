@@ -1,4 +1,5 @@
 package com.example.schedule.controller;
+import com.example.schedule.dto.ScheduleRequestDto;
 import com.example.schedule.dto.ScheduleResponseDto;
 import com.example.schedule.service.ScheduleService;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,11 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponseDto> findById(@PathVariable Long id) {
         return new ResponseEntity<>(scheduleService.findScheduleById(id), HttpStatus.OK);
 
+    }
+
+    @PostMapping
+    public ResponseEntity<ScheduleResponseDto> createSchedule(@RequestBody ScheduleRequestDto scheduleRequestDto) {
+        return new ResponseEntity<>(scheduleService.saveScheule(scheduleRequestDto), HttpStatus.CREATED);
     }
 
 
